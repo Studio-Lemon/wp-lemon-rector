@@ -1,0 +1,36 @@
+{% extends 'layouts/block-wrap.twig' %}
+{% import 'macros/media.twig' as media %}
+{% import 'macros/helpers.twig' as helpers %}
+{% block block__inner %}
+    {% set image_sizes = '(max-width: 2000px) 140vw, 2000px' %}
+    {{
+        media.picture(
+            fields.image_field,
+            'hero__picture ratio',
+            null,
+            'large',
+            image_sizes,
+            'eager'
+        )
+    }}
+    <div class="hero__overlay wp-block__inner-container">
+        <div {{ helpers.animation(is_preview, 'fade-right', 400) }}>
+            <span class="h2">{{ fields.subtitle }}</span>
+            <h1>{{ fields.title }}</h1>
+
+            <div class="hero__links theme-button-row">
+                {% if fields.link_1 %}
+                    <a class="theme-button" href="{{ fields.link_1.url }}">
+                        {{ fields.link_1.title }}
+                    </a>
+                {% endif %}
+
+                {% if fields.link_2 %}
+                    <a class="theme-button theme-button--ghost" href="{{ fields.link_2.url }}">
+                        {{ fields.link_2.title }}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

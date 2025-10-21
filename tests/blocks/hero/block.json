@@ -1,0 +1,19 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Levdbas/acf-json-schema/main/acf-blocks.json",
+    "name": "acf/hero",
+    "title": "Hero",
+    "description": "",
+    "category": "wp-lemon-blocks",
+    "icon": "lightbulb",
+    "keywords": ["hero", "header", "intro"],
+    "apiVersion": 3,
+    "textdomain": "wp-lemon-child",
+    "acf": {
+        "mode": "preview",
+        "postTypes": ["page"]
+    },
+    "supports": {
+        "mode": false,
+        "align": false
+    }
+}

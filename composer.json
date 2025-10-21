@@ -1,0 +1,35 @@
+{
+    "name": "wp-lemon/rector",
+    "description": "Rector ruleset for WP Lemon projects",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "WP Lemon Team"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "rector/rector": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "WP_Lemon\\Package\\Rector\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "rector/extension-installer": true
+        }
+    },
+    "scripts": {
+        "rector": "rector process",
+        "rector:dry-run": "rector process --dry-run",
+        "rector:clear-cache": "rector clear-cache",
+        "test": "rector process tests/blocks --dry-run",
+        "test:fix": "rector process tests/blocks"
+    }
+}
