@@ -14,13 +14,15 @@ This will install Rector along with all custom WP Lemon rules.
 
 ## Usage
 
-Since this package includes Rector, you can run it directly without additional configuration:
+Since this package includes Rector, you can run it directly:
 
 ```bash
-# Preview changes (dry-run)
-vendor/bin/rector process path/to/your/blocks --dry-run
+# Using the WP Lemon Rector executable
+vendor/bin/wp-lemon-rector process path/to/your/blocks --dry-run
+vendor/bin/wp-lemon-rector process path/to/your/blocks
 
-# Apply changes
+# Or using Rector directly
+vendor/bin/rector process path/to/your/blocks --dry-run
 vendor/bin/rector process path/to/your/blocks
 ```
 

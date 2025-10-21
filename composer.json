@@ -17,6 +17,9 @@
             "WP_Lemon\\Package\\Rector\\": "src/"
         }
     },
+    "bin": [
+        "bin/wp-lemon-rector"
+    ],
     "minimum-stability": "stable",
     "prefer-stable": true,
     "config": {

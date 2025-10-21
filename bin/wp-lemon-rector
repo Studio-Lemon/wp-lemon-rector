@@ -1,0 +1,59 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * WP Lemon Rector executable
+ * 
+ * This script provides a convenient way to run Rector with the WP Lemon configuration.
+ */
+
+// Find the autoloader
+$autoloadPaths = [
+   __DIR__ . '/../vendor/autoload.php',
+   __DIR__ . '/../../../autoload.php',
+   __DIR__ . '/vendor/autoload.php',
+];
+
+$autoloadFound = false;
+foreach ($autoloadPaths as $autoloadPath) {
+   if (file_exists($autoloadPath)) {
+      require_once $autoloadPath;
+      $autoloadFound = true;
+      break;
+   }
+}
+
+if (!$autoloadFound) {
+   fwrite(STDERR, "Error: Could not find autoloader. Please run 'composer install'.\n");
+   exit(1);
+}
+
+// Find Rector binary
+$rectorPaths = [
+   __DIR__ . '/../vendor/bin/rector',
+   __DIR__ . '/../../../rector/rector/bin/rector',
+];
+
+$rectorBinary = null;
+foreach ($rectorPaths as $path) {
+   if (file_exists($path)) {
+      $rectorBinary = $path;
+      break;
+   }
+}
+
+if (!$rectorBinary) {
+   fwrite(STDERR, "Error: Could not find Rector binary.\n");
+   exit(1);
+}
+
+// Pass all arguments to Rector
+$args = array_slice($argv, 1);
+$command = escapeshellcmd($rectorBinary);
+
+foreach ($args as $arg) {
+   $command .= ' ' . escapeshellarg($arg);
+}
+
+passthru($command, $exitCode);
+exit($exitCode);
