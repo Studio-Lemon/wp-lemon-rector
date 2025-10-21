@@ -37,6 +37,8 @@ return RectorConfig::configure()
    ->withRules([
       \WP_Lemon\Package\Rector\ClassesArrayToAddClassMethodRector::class,
       \WP_Lemon\Package\Rector\AttributesArrayToSetAttributeMethodRector::class,
+      \WP_Lemon\Package\Rector\InnerBlocksStringToMethodRector::class,
+      \WP_Lemon\Package\Rector\FieldsArrayToGetFieldMethodRector::class,
    ])
    ->withImportNames(
       importShortClasses: false,

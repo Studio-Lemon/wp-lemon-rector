@@ -38,9 +38,14 @@ class Hero_Block extends BlockRenderer
 		$this->classes[] = 'section hero alignfull has-background';
 		$this->attributes['align'] = 'full';
 
+		if (isset($this->fields['image_field']) && 12 == $this->fields['image_field']) {
+			// Do something
+			$image = $this->fields['image_field'];
+		}
+
 		$args = [
 			'fluid' => true,
-			// 'InnerBlocks' => self::create_inner_blocks(['core/heading', 'core/paragraph']),
+			'InnerBlocks' => '<InnerBlocks allowedBlocks="' . esc_attr(wp_json_encode($allowed_blocks)) . '" template="' . esc_attr(wp_json_encode($template)) . '" />',
 		];
 
 		return array_merge($context, $args);
