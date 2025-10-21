@@ -1,5 +1,5 @@
 {
-    "name": "wp-lemon/rector",
+    "name": "studiolemon/rector",
     "description": "Rector ruleset for WP Lemon projects",
     "type": "library",
     "license": "MIT",
