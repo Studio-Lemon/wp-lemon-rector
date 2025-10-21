@@ -47,8 +47,40 @@ if (!$rectorBinary) {
    exit(1);
 }
 
+// Find the WP Lemon Rector configuration file
+$packageConfigPaths = [
+   __DIR__ . '/../rector.php',
+];
+
+$packageConfig = null;
+foreach ($packageConfigPaths as $path) {
+   if (file_exists($path)) {
+      $packageConfig = $path;
+      break;
+   }
+}
+
 // Pass all arguments to Rector
 $args = array_slice($argv, 1);
+
+// Check if a config file is already specified
+$hasConfigArg = false;
+foreach ($args as $arg) {
+   if (str_starts_with($arg, '--config') || str_starts_with($arg, '-c')) {
+      $hasConfigArg = true;
+      break;
+   }
+}
+
+// Check if there's a rector.php in the current working directory
+$cwdConfig = getcwd() . '/rector.php';
+$hasCwdConfig = file_exists($cwdConfig);
+
+// If no config specified and no config in cwd, use package config
+if (!$hasConfigArg && !$hasCwdConfig && $packageConfig) {
+   array_unshift($args, '--config', $packageConfig);
+}
+
 $command = escapeshellcmd($rectorBinary);
 
 foreach ($args as $arg) {
