@@ -35,10 +35,19 @@ return RectorConfig::configure()
       RemoveUselessReturnTagRector::class,
    ])
    ->withRules([
+      // Class and presentation helpers
       \WP_Lemon\Package\Rector\ClassesArrayToAddClassMethodRector::class,
+
+      // Attribute-specific helpers (more specific first)
+      \WP_Lemon\Package\Rector\AttributesAlignToSetAlignmentRector::class,
+      \WP_Lemon\Package\Rector\AttributesIdToSetAnchorRector::class,
       \WP_Lemon\Package\Rector\AttributesArrayToSetAttributeMethodRector::class,
-      \WP_Lemon\Package\Rector\InnerBlocksStringToMethodRector::class,
+
+      // Field helpers
       \WP_Lemon\Package\Rector\FieldsArrayToGetFieldMethodRector::class,
+
+      // Inner block transformation
+      \WP_Lemon\Package\Rector\InnerBlocksStringToMethodRector::class,
    ])
    ->withImportNames(
       importShortClasses: false,

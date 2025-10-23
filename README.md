@@ -64,19 +64,43 @@ $this->classes[] = 'section hero alignfull has-background';
 $this->add_class(['section', 'hero', 'alignfull', 'has-background']);
 ```
 
-### 2. AttributesArrayToSetAttributeMethodRector
+### 2. AttributesAlignToSetAlignmentRector
 
-Transforms attribute array assignments to the `set_attribute()` method:
+Transforms the `align` attribute assignment to the `set_alignment()` method:
 
 ```php
 // Before
 $this->attributes['align'] = 'full';
 
 // After
-$this->set_attribute('align', 'full');
+$this->set_alignment('full');
 ```
 
-### 3. FieldsArrayToGetFieldMethodRector
+### 3. AttributesIdToSetAnchorRector
+
+Transforms the `id` attribute assignment to the `set_anchor()` method:
+
+```php
+// Before
+$this->attributes['id'] = 'formulier';
+
+// After
+$this->set_anchor('formulier');
+```
+
+### 4. AttributesArrayToSetAttributeMethodRector
+
+Fallback transformation for attribute assignments into `set_attribute()` when no more-specific rule applies:
+
+```php
+// Before
+$this->attributes['foo'] = 'bar';
+
+// After
+$this->set_attribute('foo', 'bar');
+```
+
+### 5. FieldsArrayToGetFieldMethodRector
 
 Transforms field array access to the `get_field()` method:
 
@@ -88,7 +112,7 @@ $value = $this->fields['image_field'];
 $value = $this->get_field('image_field');
 ```
 
-### 4. InnerBlocksStringToMethodRector
+### 6. InnerBlocksStringToMethodRector
 
 Transforms InnerBlocks HTML string concatenation to the `create_inner_blocks()` method:
 

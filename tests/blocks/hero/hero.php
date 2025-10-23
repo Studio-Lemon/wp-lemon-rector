@@ -37,11 +37,14 @@ class Hero_Block extends BlockRenderer
 	{
 		$this->classes[] = 'section hero alignfull has-background';
 		$this->attributes['align'] = 'full';
+		$this->attributes['align'] = 'wide';
 
 		if (isset($this->fields['image_field']) && 12 == $this->fields['image_field']) {
 			// Do something
 			$image = $this->fields['image_field'];
 		}
+
+		$this->attributes['id'] = 'random';
 
 		$args = [
 			'fluid' => true,
