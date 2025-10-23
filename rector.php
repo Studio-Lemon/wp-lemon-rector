@@ -9,13 +9,22 @@ use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRector;
 
+
+$path = __DIR__;
+// move up three directories
+$path = dirname(dirname(dirname($path)));
+
 return RectorConfig::configure()
    ->withPaths([
-      __DIR__ . '/src',
+      $path . '/web/app/themes/',
    ])
    ->withPhpSets(
-      php83: true,
+      php82: true,
    )
+   ->withSkip([
+      $path . '/web/app/themes/wp-lemon/*',
+      $path . '/web/app/themes/*/vendor/*',
+   ])
    ->withPreparedSets(
       deadCode: true,
       codeQuality: true,
@@ -25,7 +34,6 @@ return RectorConfig::configure()
       naming: true,
       instanceOf: true,
       earlyReturn: true,
-      strictBooleans: true,
    )
    ->withSkip([
       // Skip rules that might be too aggressive for WordPress projects
