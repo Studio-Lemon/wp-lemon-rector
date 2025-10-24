@@ -64,7 +64,20 @@ $this->classes[] = 'section hero alignfull has-background';
 $this->add_class(['section', 'hero', 'alignfull', 'has-background']);
 ```
 
-### 2. AttributesAlignToSetAlignmentRector
+### 2. MergeConsecutiveAddClassCallsRector
+
+Optimizes multiple consecutive `add_class()` calls by merging them into a single call:
+
+```php
+// Before
+$this->add_class(['bg-pill']);
+$this->add_class(['section', 'has-background']);
+
+// After
+$this->add_class(['bg-pill', 'section', 'has-background']);
+```
+
+### 3. AttributesAlignToSetAlignmentRector
 
 Transforms the `align` attribute assignment to the `set_alignment()` method:
 
@@ -76,7 +89,7 @@ $this->attributes['align'] = 'full';
 $this->set_alignment('full');
 ```
 
-### 3. AttributesIdToSetAnchorRector
+### 4. AttributesIdToSetAnchorRector
 
 Transforms the `id` attribute assignment to the `set_anchor()` method:
 
@@ -88,7 +101,7 @@ $this->attributes['id'] = 'formulier';
 $this->set_anchor('formulier');
 ```
 
-### 4. AttributesArrayToSetAttributeMethodRector
+### 5. AttributesArrayToSetAttributeMethodRector
 
 Fallback transformation for attribute assignments into `set_attribute()` when no more-specific rule applies:
 
@@ -100,7 +113,7 @@ $this->attributes['foo'] = 'bar';
 $this->set_attribute('foo', 'bar');
 ```
 
-### 5. FieldsArrayToGetFieldMethodRector
+### 6. FieldsArrayToGetFieldMethodRector
 
 Transforms field array access to the `get_field()` method:
 
@@ -112,7 +125,7 @@ $value = $this->fields['image_field'];
 $value = $this->get_field('image_field');
 ```
 
-### 6. IsPreviewPropertyToMethodRector
+### 7. IsPreviewPropertyToMethodRector
 
 Transforms `is_preview` property access to method call:
 
@@ -128,7 +141,7 @@ if ($this->is_preview()) {
 }
 ```
 
-### 7. InnerBlocksStringToMethodRector
+### 8. InnerBlocksStringToMethodRector
 
 Transforms InnerBlocks HTML string concatenation to the `create_inner_blocks()` method:
 
