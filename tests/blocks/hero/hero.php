@@ -46,6 +46,10 @@ class Hero_Block extends BlockRenderer
 
 		$this->attributes['id'] = 'random';
 
+		if ($this->is_preview) {
+			$this->add_notification('This is a preview of the card slider block. The slider will not work in the editor.', 'notice');
+		}
+
 		$args = [
 			'fluid' => true,
 			'InnerBlocks' => '<InnerBlocks allowedBlocks="' . esc_attr(wp_json_encode($allowed_blocks)) . '" template="' . esc_attr(wp_json_encode($template)) . '" />',

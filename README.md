@@ -112,7 +112,23 @@ $value = $this->fields['image_field'];
 $value = $this->get_field('image_field');
 ```
 
-### 6. InnerBlocksStringToMethodRector
+### 6. IsPreviewPropertyToMethodRector
+
+Transforms `is_preview` property access to method call:
+
+```php
+// Before
+if ($this->is_preview) {
+    // do something
+}
+
+// After
+if ($this->is_preview()) {
+    // do something
+}
+```
+
+### 7. InnerBlocksStringToMethodRector
 
 Transforms InnerBlocks HTML string concatenation to the `create_inner_blocks()` method:
 
