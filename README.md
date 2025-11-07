@@ -141,7 +141,19 @@ if ($this->is_preview()) {
 }
 ```
 
-### 8. InnerBlocksStringToMethodRector
+### 8. BlockDisabledPropertyToMethodRector
+
+Transforms `block_disabled` property assignment to the `set_disabled()` method:
+
+```php
+// Before
+$this->block_disabled = true;
+
+// After
+$this->set_disabled();
+```
+
+### 9. InnerBlocksStringToMethodRector
 
 Transforms InnerBlocks HTML string concatenation to the `create_inner_blocks()` method:
 

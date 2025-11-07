@@ -46,6 +46,8 @@ class Hero_Block extends BlockRenderer
 
 		$this->attributes['id'] = 'random';
 
+		$this->block_disabled = true;
+
 		if ($this->is_preview) {
 			$this->add_notification('This is a preview of the card slider block. The slider will not work in the editor.', 'notice');
 		}

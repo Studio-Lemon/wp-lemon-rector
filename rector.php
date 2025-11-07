@@ -57,6 +57,7 @@ return RectorConfig::configure()
 
       // Property to method transformations
       \WP_Lemon\Package\Rector\IsPreviewPropertyToMethodRector::class,
+      \WP_Lemon\Package\Rector\BlockDisabledPropertyToMethodRector::class,
 
       // Inner block transformation
       \WP_Lemon\Package\Rector\InnerBlocksStringToMethodRector::class,
