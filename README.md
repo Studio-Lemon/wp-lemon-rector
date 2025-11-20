@@ -14,21 +14,27 @@ This will install Rector along with all custom WP Lemon rules.
 
 ## Usage
 
-Since this package includes Rector, you can run it directly:
+Since this package includes Rector, you can run it directly without any additional configuration:
 
 ```bash
-# Using the WP Lemon Rector executable
-vendor/bin/wp-lemon-rector process path/to/your/blocks --dry-run
-vendor/bin/wp-lemon-rector process path/to/your/blocks
+# Dry-run to see what would change
+vendor/bin/rector process web/app/themes/your-theme --dry-run
 
-# Or using Rector directly
-vendor/bin/rector process path/to/your/blocks --dry-run
-vendor/bin/rector process path/to/your/blocks
+# Apply the changes
+vendor/bin/rector process web/app/themes/your-theme
 ```
 
-### Project Configuration (Optional)
+### Automatic Configuration
 
-If you want to customize paths or add additional rules, create a `rector.php` file in your project root:
+The package automatically detects whether it's running in:
+- **Test mode**: When developing/testing the package itself (uses `tests/blocks/`)
+- **Project mode**: When installed in a WP Lemon project (uses `web/app/themes/`, skips `wp-lemon` parent theme and vendor directories)
+
+This means you can use it out-of-the-box without any configuration file!
+
+### Custom Configuration (Optional)
+
+If you need to customize paths, add additional rules, or change settings, create a `rector.php` file in your project root:
 
 ```php
 <?php
@@ -39,14 +45,16 @@ use Rector\Config\RectorConfig;
 
 return RectorConfig::configure()
     ->withPaths([
-        __DIR__ . '/wp-content/themes/your-theme/blocks',
-        __DIR__ . '/wp-content/plugins/your-plugin/src',
+        __DIR__ . '/web/app/themes/your-theme/blocks',
+        __DIR__ . '/web/app/plugins/your-plugin/src',
     ])
     // Import the WP Lemon Rector configuration
     ->withSets([
         __DIR__ . '/vendor/studiolemon/wp-lemon-rector/rector.php',
     ]);
 ```
+
+**Note**: When using a custom configuration, the package's auto-detection is bypassed, so make sure to specify all the paths you need.
 
 ## Custom Rules
 
@@ -78,6 +86,26 @@ $this->add_class(['bg-pill', 'section', 'has-background']);
 ```
 
 ### 3. AttributesAlignToSetAlignmentRector
+
+### 3. SiteIconsAttributesToConstructorRector
+
+Transforms property assignments on a `Site_Icons` instance into a single constructor array argument:
+
+```php
+// Before
+$icons = new Site_Icons();
+$icons->short_name = 'BusinessBase';
+$icons->background_color = '#ffffff';
+$icons->theme_color = '#f5f9e5';
+
+// After
+$icons = new Site_Icons([
+    'short_name' => 'BusinessBase',
+    'background_color' => '#ffffff',
+    'theme_color' => '#f5f9e5',
+]);
+```
+
 
 Transforms the `align` attribute assignment to the `set_alignment()` method:
 

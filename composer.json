@@ -17,6 +17,9 @@
             "WP_Lemon\\Package\\Rector\\": "src/"
         }
     },
+    "require-dev": {
+           "highground/bulldozer": "^5.0"
+    },
     "bin": [
         "bin/wp-lemon-rector"
     ],
@@ -25,6 +28,7 @@
     "config": {
         "sort-packages": true,
         "allow-plugins": {
+            "composer/installers": true,
             "rector/extension-installer": true
         }
     },

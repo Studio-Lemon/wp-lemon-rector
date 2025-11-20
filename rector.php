@@ -11,20 +11,31 @@ use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRect
 
 
 $path = __DIR__;
-// move up three directories
-$path = dirname(dirname(dirname($path)));
+
+// Detect if we're running tests on the package itself or being used in a project
+$isTestMode = file_exists($path . '/tests/blocks/');
+$isInstalledPackage = file_exists(dirname(dirname(dirname($path))) . '/web/app/themes/');
+
+if ($isTestMode && !$isInstalledPackage) {
+   // Running tests on the package itself
+   $paths = [$path . '/tests/'];
+   $skipPaths = [];
+} else {
+   // Being used in a project - move up three directories to get to project root
+   $projectRoot = dirname(dirname(dirname($path)));
+   $paths = [$projectRoot . '/web/app/themes/'];
+   $skipPaths = [
+      $projectRoot . '/web/app/themes/wp-lemon/*',
+      $projectRoot . '/web/app/themes/*/vendor/*',
+   ];
+}
 
 return RectorConfig::configure()
-   ->withPaths([
-      $path . '/web/app/themes/',
-   ])
+   ->withPaths($paths)
    ->withPhpSets(
-      php82: true,
+      php83: true,
    )
-   ->withSkip([
-      $path . '/web/app/themes/wp-lemon/*',
-      $path . '/web/app/themes/*/vendor/*',
-   ])
+   ->withSkip($skipPaths)
    ->withPreparedSets(
       deadCode: true,
       codeQuality: true,
@@ -46,6 +57,7 @@ return RectorConfig::configure()
       // Class and presentation helpers
       \WP_Lemon\Package\Rector\ClassesArrayToAddClassMethodRector::class,
       \WP_Lemon\Package\Rector\MergeConsecutiveAddClassCallsRector::class,
+      \WP_Lemon\Package\Rector\SiteIconsAttributesToConstructorRector::class,
 
       // Attribute-specific helpers (more specific first)
       \WP_Lemon\Package\Rector\AttributesAlignToSetAlignmentRector::class,
