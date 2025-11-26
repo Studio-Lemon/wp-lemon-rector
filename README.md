@@ -17,20 +17,14 @@ This will install Rector along with all custom WP Lemon rules.
 Since this package includes Rector, you can run it directly without any additional configuration:
 
 ```bash
-# Dry-run to see what would change
-vendor/bin/rector process web/app/themes/your-theme --dry-run
+# Using the WP Lemon Rector executable
+vendor/bin/wp-lemon-rector process path/to/your/blocks --dry-run
+vendor/bin/wp-lemon-rector process path/to/your/blocks
 
-# Apply the changes
-vendor/bin/rector process web/app/themes/your-theme
+# Or using Rector directly
+vendor/bin/rector process path/to/your/blocks --dry-run
+vendor/bin/rector process path/to/your/blocks
 ```
-
-### Automatic Configuration
-
-The package automatically detects whether it's running in:
-- **Test mode**: When developing/testing the package itself (uses `tests/blocks/`)
-- **Project mode**: When installed in a WP Lemon project (uses `web/app/themes/`, skips `wp-lemon` parent theme and vendor directories)
-
-This means you can use it out-of-the-box without any configuration file!
 
 ### Custom Configuration (Optional)
 
@@ -53,8 +47,6 @@ return RectorConfig::configure()
         __DIR__ . '/vendor/studiolemon/wp-lemon-rector/rector.php',
     ]);
 ```
-
-**Note**: When using a custom configuration, the package's auto-detection is bypassed, so make sure to specify all the paths you need.
 
 ## Custom Rules
 
