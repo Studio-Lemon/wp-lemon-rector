@@ -66,6 +66,7 @@ return RectorConfig::configure()
 
       // Field helpers
       \WP_Lemon\Package\Rector\FieldsArrayToGetFieldMethodRector::class,
+      \WP_Lemon\Package\Rector\AcfInitToIncludeFieldsRector::class,
 
       // Property to method transformations
       \WP_Lemon\Package\Rector\IsPreviewPropertyToMethodRector::class,

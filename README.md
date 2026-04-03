@@ -98,7 +98,6 @@ $icons = new Site_Icons([
 ]);
 ```
 
-
 Transforms the `align` attribute assignment to the `set_alignment()` method:
 
 ```php
@@ -145,7 +144,21 @@ $value = $this->fields['image_field'];
 $value = $this->get_field('image_field');
 ```
 
-### 7. IsPreviewPropertyToMethodRector
+### 7. AcfInitToIncludeFieldsRector
+
+In files prefixed with `field-` (e.g. `field-hero.php`), replaces the `acf/init` hook with `acf/include_fields`. This ensures ACF field groups are registered at the correct point in the WordPress lifecycle.
+
+```php
+// Before (in field-hero.php)
+add_action('acf/init', 'my_acf_add_local_field_groups');
+
+// After
+add_action('acf/include_fields', 'my_acf_add_local_field_groups');
+```
+
+> **Note:** This rule only applies to files whose filename starts with `field-`. Files with other names are left untouched.
+
+### 8. IsPreviewPropertyToMethodRector
 
 Transforms `is_preview` property access to method call:
 
@@ -161,7 +174,7 @@ if ($this->is_preview()) {
 }
 ```
 
-### 8. BlockDisabledPropertyToMethodRector
+### 9. BlockDisabledPropertyToMethodRector
 
 Transforms `block_disabled` property assignment to the `set_disabled()` method:
 
@@ -173,7 +186,7 @@ $this->block_disabled = true;
 $this->set_disabled();
 ```
 
-### 9. InnerBlocksStringToMethodRector
+### 10. InnerBlocksStringToMethodRector
 
 Transforms InnerBlocks HTML string concatenation to the `create_inner_blocks()` method:
 
@@ -204,7 +217,7 @@ In addition to custom rules, this package includes:
 Some rules are intentionally skipped to maintain compatibility with WordPress:
 
 - `StaticClosureRector` - WordPress often uses dynamic closures
-- `StaticArrowFunctionRector` - WordPress often uses dynamic arrow functions  
+- `StaticArrowFunctionRector` - WordPress often uses dynamic arrow functions
 - `ReadOnlyPropertyRector` - May conflict with WordPress patterns
 
 ## Contributing
