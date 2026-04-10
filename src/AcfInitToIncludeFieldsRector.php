@@ -16,7 +16,7 @@ final class AcfInitToIncludeFieldsRector extends AbstractRector
    public function getRuleDefinition(): RuleDefinition
    {
       return new RuleDefinition(
-         "In field-*.php files, replace add_action('acf/init', with add_action('acf/include_fields'",
+         "In field-*.php and fields-*.php files, replace add_action('acf/init', with add_action('acf/include_fields'",
          [
             new CodeSample(
                <<<'CODE_SAMPLE'
@@ -40,9 +40,9 @@ CODE_SAMPLE
     */
    public function refactor(Node $node): ?Node
    {
-      // Only process files prefixed with "field-"
+      // Only process files prefixed with "field-" or "fields-"
       $basename = basename($this->file->getFilePath());
-      if (!str_starts_with($basename, 'field-')) {
+      if (!str_starts_with($basename, 'field-') && !str_starts_with($basename, 'fields-')) {
          return null;
       }
 

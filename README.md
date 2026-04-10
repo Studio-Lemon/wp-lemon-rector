@@ -146,17 +146,17 @@ $value = $this->get_field('image_field');
 
 ### 7. AcfInitToIncludeFieldsRector
 
-In files prefixed with `field-` (e.g. `field-hero.php`), replaces the `acf/init` hook with `acf/include_fields`. This ensures ACF field groups are registered at the correct point in the WordPress lifecycle.
+In files prefixed with `field-` or `fields-` (e.g. `field-hero.php`, `fields-hero.php`), replaces the `acf/init` hook with `acf/include_fields`. This ensures ACF field groups are registered at the correct point in the WordPress lifecycle.
 
 ```php
-// Before (in field-hero.php)
+// Before (in field-hero.php or fields-hero.php)
 add_action('acf/init', 'my_acf_add_local_field_groups');
 
 // After
 add_action('acf/include_fields', 'my_acf_add_local_field_groups');
 ```
 
-> **Note:** This rule only applies to files whose filename starts with `field-`. Files with other names are left untouched.
+> **Note:** This rule only applies to files whose filename starts with `field-` or `fields-`. Files with other names are left untouched.
 
 ### 8. IsPreviewPropertyToMethodRector
 
