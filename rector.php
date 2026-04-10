@@ -27,6 +27,7 @@ if ($isTestMode && !$isInstalledPackage) {
    $skipPaths = [
       $projectRoot . '/web/app/themes/wp-lemon/*',
       $projectRoot . '/web/app/themes/*/vendor/*',
+      $projectRoot . '/web/app/themes/*/resources/*',
    ];
 }
 
