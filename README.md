@@ -18,14 +18,11 @@ Since this package includes Rector, you can run it directly without any addition
 
 ```bash
 # Using the WP Lemon Rector executable
-vendor/bin/wp-lemon-rector process path/to/your/blocks --dry-run
-vendor/bin/wp-lemon-rector process path/to/your/blocks
-
-# Or using Rector directly
-vendor/bin/rector process path/to/your/blocks --dry-run
-vendor/bin/rector process path/to/your/blocks
+vendor/bin/wp-lemon-rector --dry-run
+vendor/bin/wp-lemon-rector
 ```
 
+````bash
 ### Custom Configuration (Optional)
 
 If you need to customize paths, add additional rules, or change settings, create a `rector.php` file in your project root:
@@ -46,7 +43,7 @@ return RectorConfig::configure()
     ->withSets([
         __DIR__ . '/vendor/studiolemon/wp-lemon-rector/rector.php',
     ]);
-```
+````
 
 ## Custom Rules
 
