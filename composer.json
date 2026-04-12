@@ -1,42 +1,43 @@
 {
-    "name": "studiolemon/wp-lemon-rector",
-    "description": "Rector ruleset for WP Lemon projects",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Studio Lemon"
-        }
-    ],
-    "require": {
-        "php": "^8.2",
-        "rector/rector": "^2.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "WP_Lemon\\Package\\Rector\\": "src/"
-        }
-    },
-    "require-dev": {
-           "highground/bulldozer": "^5.0"
-    },
-    "bin": [
-        "bin/wp-lemon-rector"
-    ],
-    "minimum-stability": "stable",
-    "prefer-stable": true,
-    "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "composer/installers": true,
-            "rector/extension-installer": true
-        }
-    },
-    "scripts": {
-        "rector": "rector process",
-        "rector:dry-run": "rector process --dry-run",
-        "rector:clear-cache": "rector clear-cache",
-        "test": "rector process tests/blocks --dry-run",
-        "test:fix": "rector process tests/blocks"
+  "name": "studiolemon/wp-lemon-rector",
+  "description": "Rector ruleset for WP Lemon projects",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Studio Lemon"
     }
+  ],
+  "homepage": "https://github.com/Studio-Lemon/wp-lemon-rector",
+  "require": {
+    "php": "^8.2",
+    "rector/rector": "^2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "WP_Lemon\\Package\\Rector\\": "src/"
+    }
+  },
+  "require-dev": {
+    "highground/bulldozer": "^5.0"
+  },
+  "bin": [
+    "bin/wp-lemon-rector"
+  ],
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "composer/installers": true,
+      "rector/extension-installer": true
+    }
+  },
+  "scripts": {
+    "rector": "rector process",
+    "rector:dry-run": "rector process --dry-run",
+    "rector:clear-cache": "rector clear-cache",
+    "test": "rector process tests/blocks --dry-run",
+    "test:fix": "rector process tests/blocks"
+  }
 }
