@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
 use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
-use Rector\Php81\Rector\Array_\FirstClassCallableRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddVoidReturnTypeWhereNoReturnRector;
@@ -50,7 +49,6 @@ return RectorConfig::configure()
    ->withSkip([
       // Skip rules that might be too aggressive for WordPress projects
       ReadOnlyPropertyRector::class,
-      FirstClassCallableRector::class,
       RemoveUselessParamTagRector::class,
       RemoveUselessReturnTagRector::class,
    ])
